@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block main %}
+<div class="my-4">
+  <h2 class="fw-bold mb-4">Properties</h2>
+
+  {% if properties %}
+    <div class="row g-4">
+      {% for prop in properties %}
+        <div class="col-md-4">
+          <div class="card h-100 shadow-sm border-0">
+            <img
+              src="{{ url_for('static', filename='uploads/' + prop.photo) }}"
+              class="card-img-top"
+              alt="{{ prop.title }}"
+              style="height: 220px; object-fit: cover;"
+            >
+            <div class="card-body">
+              <h5 class="card-title fw-semibold">{{ prop.title }}</h5>
+              <p class="text-muted small mb-2">
+                <i class="bi bi-geo-alt"></i> {{ prop.location }}
+              </p>
+              <span class="badge text-white mb-2" style="background-color: #1abc9c; font-size: 0.85rem;">
+                ${{ "{:,.0f}".format(prop.price) }}
+              </span>
+            </div>
+            <div class="card-footer p-0 border-0">
+              <a href="{{ url_for('property_detail', propertyid=prop.id) }}"
+                 class="btn w-100 text-white rounded-0 rounded-bottom py-2"
+                 style="background-color: #1abc9c;">
+                View Property
+              </a>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  {% else %}
+    <div class="text-center py-5">
+      <p class="text-muted fs-5">No properties listed yet.</p>
+      <a href="{{ url_for('create_property') }}" class="btn text-white" style="background-color: #1abc9c;">
+        Add the first property
+      </a>
+    </div>
+  {% endif %}
+</div>
+{% endblock %}

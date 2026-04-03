@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+
+{% block main %}
+<div class="row justify-content-center my-4">
+  <div class="col-md-7">
+    <h2 class="fw-bold mb-4">Add New Property</h2>
+
+    <div class="card shadow-sm p-4">
+      <form method="POST" action="{{ url_for('create_property') }}" enctype="multipart/form-data" novalidate>
+        {{ form.hidden_tag() }}
+
+        <div class="mb-3">
+          {{ form.title.label(class="form-label fw-semibold") }}
+          {{ form.title(class="form-control", placeholder="e.g. Beautiful Four Bedroom Cottage") }}
+          {% for error in form.title.errors %}
+            <div class="text-danger small">{{ error }}</div>
+          {% endfor %}
+        </div>
+
+        <div class="mb-3">
+          {{ form.description.label(class="form-label fw-semibold") }}
+          {{ form.description(class="form-control", rows=4, placeholder="Short description of the property...") }}
+          {% for error in form.description.errors %}
+            <div class="text-danger small">{{ error }}</div>
+          {% endfor %}
+        </div>
+
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            {{ form.no_of_rooms.label(class="form-label fw-semibold") }}
+            {{ form.no_of_rooms(class="form-control", placeholder="3") }}
+            {% for error in form.no_of_rooms.errors %}
+              <div class="text-danger small">{{ error }}</div>
+            {% endfor %}
+          </div>
+          <div class="col-md-6 mb-3">
+            {{ form.no_of_bathrooms.label(class="form-label fw-semibold") }}
+            {{ form.no_of_bathrooms(class="form-control", placeholder="2") }}
+            {% for error in form.no_of_bathrooms.errors %}
+              <div class="text-danger small">{{ error }}</div>
+            {% endfor %}
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            {{ form.price.label(class="form-label fw-semibold") }}
+            {{ form.price(class="form-control", placeholder="15000000") }}
+            {% for error in form.price.errors %}
+              <div class="text-danger small">{{ error }}</div>
+            {% endfor %}
+          </div>
+          <div class="col-md-6 mb-3">
+            {{ form.property_type.label(class="form-label fw-semibold") }}
+            {{ form.property_type(class="form-select") }}
+            {% for error in form.property_type.errors %}
+              <div class="text-danger small">{{ error }}</div>
+            {% endfor %}
+          </div>
+        </div>
+
+        <div class="mb-3">
+          {{ form.location.label(class="form-label fw-semibold") }}
+          {{ form.location(class="form-control", placeholder="10 Waterloo Rd") }}
+          {% for error in form.location.errors %}
+            <div class="text-danger small">{{ error }}</div>
+          {% endfor %}
+        </div>
+
+        <div class="mb-4">
+          {{ form.photo.label(class="form-label fw-semibold") }}
+          {{ form.photo(class="form-control") }}
+          {% for error in form.photo.errors %}
+            <div class="text-danger small">{{ error }}</div>
+          {% endfor %}
+        </div>
+
+        <button type="submit" class="btn text-white px-4" style="background-color: #1abc9c;">
+          Add Property
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}
